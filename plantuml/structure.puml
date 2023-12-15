@@ -1,0 +1,85 @@
+@startuml
+abstract class ScrabblePlayer {
+    - rack
+    __
+    + fill_rack(bag: ScrabbleBag)
+    .. abstract methods ..
+    +  {abstract} say_hello()
+    +  {abstract} suggest_move(board: ScrabbleBoad)
+}
+
+ArtificalPlayerBasic <|-- ScrabblePlayer
+class ArtificalPlayerBasic {
+    Implements custom logic.
+}
+hide ArtificalPlayerBasic methods
+
+HumanPlayer <|-- ScrabblePlayer
+class HumanPlayer {
+    Implements custom logic.
+}
+hide HumanPlayer methods
+
+artifical_player <|.. ScrabblePlayer
+class ArtificalPlayerBasic
+hide artifical_player members
+
+
+note left of artifical_player: Different AI players can be\nextended as childs
+
+ScrabblePlayer -- ScrabbleRack: has >
+class ScrabbleRack {
+    - rack
+    - size
+
+    + count()
+    + count_missing()
+    + add(pieces: list[str])
+
+}
+
+class TileInfo{
+    + letter: str
+    + count: int
+    + value: int
+}
+hide TileInfo methods
+
+TileInfo -* ScrabbleBag: holds <
+class ScrabbleBag {
+    - bag
+    - tile_string
+    __
+    + count()
+    + remaining_points()
+    + draw_tile()
+    + draw_tiles()
+    + tile_score(tile: str)
+    - _fill_bag()
+    - _create_tile_string()
+    .. constructor ..
+    + __init__(seed: int = 0)
+}
+
+class ScrabbleBoard {
+    - board_states:
+
+    + get(age: int = 0)
+    + perform_move()
+}
+
+ScrabbleGame *- ScrabblePlayer: played by (2 - 4) >
+ScrabbleGame -- ScrabbleBag: has >
+ScrabbleBoard - ScrabbleGame: has <
+class ScrabbleGame {
+    - players
+    - bag
+    - board
+    + check_move_validity()
+}
+
+
+
+
+
+@enduml

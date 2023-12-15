@@ -1,0 +1,20 @@
+@startuml
+start
+
+:initialize board and tile racks;
+repeat
+    repeat
+        :suggest move\n[current_board, current_rack];
+        :check move validity;
+    repeat while (valid?) -> no
+    :perform move on board;
+    :calculate and save gained points;
+
+    if (bag contains tiles?) then (yes)
+        :redraw tiles;
+    else (no)
+    endif
+repeat while (player has tiles left in rack?) -> yes: continue\n with next player
+
+stop
+@enduml
