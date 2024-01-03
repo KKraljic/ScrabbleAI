@@ -1,8 +1,9 @@
 import os
+import sys
 from array import array
 from string import ascii_uppercase
 
-from backend.datastructures.trie import Trie
+from src.backend.datastructures.trie import Trie
 
 
 class DAWG:
@@ -13,26 +14,26 @@ class DAWG:
         # Check existence and generate path
         dictionaries_directory = os.path.join(os.getcwd(), 'data', 'dictionaries')
         if dictionary_name not in os.listdir(dictionaries_directory):
-            exit("Couldn't find specified dictionary.")
+            sys.exit("Couldn't find specified dictionary.")
         dictionary_path = os.path.join(dictionaries_directory, dictionary_name)
 
         # Read file line by line
-        file = open(dictionary_path, 'r')
-        count = 0
-        while True:
-            count += 1
-            line = file.readline()
+        with open(dictionary_path, 'r', encoding='utf-8') as file:
+            count = 0
+            while True:
+                count += 1
+                line = file.readline()
 
-            if line:
-                self._process_new_line(line)
-            else:
-                break
+                if line:
+                   self._process_new_line(line)
+                else:
+                    break
 
-        # Number trie
-        self.trie.number_trie()
+            # Number trie
+            self.trie.number_trie()
 
-        # Minimze trie to dawg
-        self._minimze_trie()
+            # Minimize trie to dawg
+            self._minimze_trie()
 
     def _process_new_line(self, line):
         line = line.strip()
@@ -44,7 +45,7 @@ class DAWG:
         # Create list of unique pairs and initialize with false
         pairs: list[array[Trie, Trie, bool]] = []
         for i, node_a in enumerate(node_list[:-1]):
-            for node_b in node_list[i+1:]:
+            for node_b in node_list[i + 1:]:
                 pairs.append([node_a, node_b, False])
 
         # Mark all pairs as not combinable if they differ in their acceptance
@@ -62,7 +63,8 @@ class DAWG:
                 for letter in ascii_uppercase:
 
                     if letter in check_pair[0].subtrie_keys() and letter in check_pair[1].subtrie_keys():
-                        if (check_pair[0].go(letter).is_end and not check_pair[1].go(letter).is_end) or (check_pair[1].go(letter).is_end and not check_pair[0].go(letter).is_end):
+                        if (check_pair[0].go(letter).is_end and not check_pair[1].go(letter).is_end) or (
+                                check_pair[1].go(letter).is_end and not check_pair[0].go(letter).is_end):
                             check_pair[2] = True
                             marking_count += 1
                             break
@@ -76,7 +78,6 @@ class DAWG:
                             check_pair[2] = True
                             marking_count += 1
                             break
-
 
         for i, pair in enumerate(list(filter(lambda p: not p[2], pairs))):
             print(f"{str(pair[0])} - {str(pair[1])} => {str(pair[2])}")
@@ -111,8 +112,6 @@ class DAWG:
         print(len(groups))
 
         self.dawg = Trie
-
-
 
     def load(self):
         print('Load DAWG ...')

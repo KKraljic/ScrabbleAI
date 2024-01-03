@@ -1,6 +1,10 @@
+"""
+Top module for the whole implementation. Invokes the instance of the game class.
+"""
+
 import argparse
 
-from shared.scrabble_game import ScrabbleGame
+from src.shared.scrabble_game import ScrabbleGame
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
