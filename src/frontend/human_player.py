@@ -4,6 +4,7 @@ It implements the logic and UI for playing.
 """
 
 from src.shared.scrabble_board import ScrabbleBoard
+from src.shared.scrabble_move import ScrabbleMove
 from src.shared.scrabble_player import ScrabblePlayer
 
 
@@ -11,7 +12,7 @@ class HumanPlayer(ScrabblePlayer):
     """
     Representation of a real player, that can be controlled by the user.
     """
-    def suggest_move(self, board: ScrabbleBoard):
+    def suggest_move(self, board: ScrabbleBoard) -> ScrabbleMove:
         """
         Gives the user the current board. The user has to decide which move to make.
         :param board: Current board

@@ -38,7 +38,7 @@ class ScrabbleRack {
 
 }
 
-class TileInfo{
+class TileInfo << (D,orchid) >>{
     + letter: str
     + count: int
     + value: int
@@ -62,13 +62,13 @@ class ScrabbleBag {
 }
 
 class ScrabbleBoard {
-    - board_states:
+    - board_states
 
     + get(age: int = 0)
     + perform_move()
 }
 
-ScrabbleGame *- ScrabblePlayer: played by (2 - 4) >
+ScrabbleGame -- ScrabblePlayer: played by (2 - 4) >
 ScrabbleGame -- ScrabbleBag: has >
 ScrabbleBoard - ScrabbleGame: has <
 class ScrabbleGame {
@@ -78,6 +78,23 @@ class ScrabbleGame {
     + check_move_validity()
 }
 
+ScrabbleMove - ScrabbleBoard: will be performed >
+ScrabblePlayer -- ScrabbleMove: suggests >
+class ScrabbleMove<< (D,orchid) >>{
+    + postion
+    + direction
+    + word
+    + tiles_used
+}
+hide ScrabbleMove methods
+
+
+MoveDirection .. ScrabbleMove
+enum MoveDirection{
+    ACROSS = 1
+    DOWN = 2
+}
+hide MoveDirection methods
 
 
 

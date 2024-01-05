@@ -78,6 +78,7 @@ class ScrabbleBag:
         :param tile: The tile.
         :return: The score of the tile.
         """
+        # TODO: To be implemented
 
 
 @dataclass

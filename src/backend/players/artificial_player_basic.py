@@ -4,6 +4,7 @@ The module holds the logic for an artificial player.
 
 from src.backend.datastructures.dawg import DAWG
 from src.shared.scrabble_board import ScrabbleBoard
+from src.shared.scrabble_move import ScrabbleMove
 from src.shared.scrabble_player import ScrabblePlayer
 
 
@@ -20,7 +21,7 @@ class ArtificialPlayerBasic(ScrabblePlayer):
         self.dawg = DAWG()
         self.dawg.create('test.txt')
 
-    def suggest_move(self, board: ScrabbleBoard):
+    def suggest_move(self, board: ScrabbleBoard) -> ScrabbleMove:
         """
         Move suggestion
         """

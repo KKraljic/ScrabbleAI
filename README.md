@@ -26,7 +26,7 @@ Every test method must begin with `test_`.
     class SampleTestCase(unittest.TestCase):
 
         # Test methods ...
-        def test_sample(self):
+        def test_sample(self) -> None:
             self.assertTrue('Hello' != 'World')
 
 ## Project information

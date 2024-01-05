@@ -6,6 +6,7 @@ from src.backend.players.artificial_player_basic import ArtificialPlayerBasic
 from src.frontend.human_player import HumanPlayer
 from src.shared.scrabble_bag import ScrabbleBag
 from src.shared.scrabble_board import ScrabbleBoard
+from src.shared.scrabble_move import ScrabbleMove
 
 
 class ScrabbleGame:
@@ -38,4 +39,10 @@ class ScrabbleGame:
     def play(self) -> None:
         """
         Start the game loop for playing
+        """
+
+    def check_move_validity(self, move: ScrabbleMove) -> bool:
+        """
+        Checks if the provided move is valid
+        :return: Move validity
         """

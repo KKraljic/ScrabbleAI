@@ -5,8 +5,10 @@ of the game loop, thus not caring if a player or an AI implementation is playing
 """
 
 from abc import ABC, abstractmethod
+
 from src.shared.scrabble_bag import ScrabbleBag
 from src.shared.scrabble_board import ScrabbleBoard
+from src.shared.scrabble_move import ScrabbleMove
 from src.shared.scrabble_rack import ScrabbleRack
 
 
@@ -25,7 +27,7 @@ class ScrabblePlayer(ABC):
         """
 
     @abstractmethod
-    def suggest_move(self, board: ScrabbleBoard):
+    def suggest_move(self, board: ScrabbleBoard) -> ScrabbleMove:
         """
         Given the current board, the method returns the move
         that the player would make. The logic behind it

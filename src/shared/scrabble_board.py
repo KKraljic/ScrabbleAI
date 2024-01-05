@@ -1,8 +1,9 @@
 """
-The module holds the class for representing the board (over time=
+The module holds the class for representing the board (over time)
 """
 
 from src.shared.config_reader import Config
+from src.shared.scrabble_move import ScrabbleMove
 
 
 class ScrabbleBoard:
@@ -24,6 +25,12 @@ class ScrabbleBoard:
         if saved_states_count > age:
             return self.board_states[saved_states_count - age - 1]
         raise ValueError("A board state this old does not exist.")
+
+    def perform_move(self, move: ScrabbleMove) -> int:
+        """
+        Performs the actual move on the board
+        :return: Number of points gained
+        """
 
     def print(self, age: int = 0) -> None:
         """
